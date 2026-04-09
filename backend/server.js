@@ -1,12 +1,19 @@
 require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+const { pool } = require('./db/index');
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
+    store: new pgSession({
+        pool,
+        tableName: 'session'
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,

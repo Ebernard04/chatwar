@@ -2,6 +2,8 @@ CREATE TABLE IF NOT EXISTS streamers (
     id SERIAL PRIMARY KEY,
     streamlabs_id VARCHAR(255) UNIQUE NOT NULL,
     display_name VARCHAR(255),
+    twitch_username VARCHAR(255),
+    youtube_channel_id VARCHAR(255),
     access_token TEXT NOT NULL,
     refresh_token TEXT,
     token_expires_at TIMESTAMPTZ,
